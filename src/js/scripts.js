@@ -124,12 +124,12 @@ window.addEventListener('DOMContentLoaded', () => {
         slidesToShow = 1;
     }
 
-    console.log(slidesToShow);
+    // console.log(slidesToShow);
 
     let itemWidth = slider.clientWidth / slidesToShow;
     let movePosition = slidesToScroll * itemWidth;
 
-    console.log(itemWidth);
+    // console.log(itemWidth);
 
 
     items.forEach((item)=> {                            ////задаем ширину для каждого элемента
@@ -183,8 +183,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     let socLink = document.querySelectorAll('.social > li > a');
 
-    console.log(socLink);
-
+    // console.log(socLink);
 
     for(let i = 0; i < socLink.length; i++) {
         socLink[i].addEventListener('click', function(e) {
@@ -199,7 +198,8 @@ window.addEventListener('DOMContentLoaded', () => {
             let width = 640;
             let height = 480;
 
-            var top = (screen.height - height)/2, left = (screen.width - width)/2;
+            let top = (screen.height - height)/2, 
+            left = (screen.width - width)/2;
 
             if (top < 0) {
                 top = 0;
@@ -207,13 +207,97 @@ window.addEventListener('DOMContentLoaded', () => {
 
             if (left < 0) {
                 left = 0;
-            }
-                
+            }        
             apiUrl = apiUrl.split('%url%').join(url).split('%title%').join(title).split('%image%').join(image).split('%description%').join(description);
             window.open(apiUrl, title, 'width='+ width +', height='+ height +', top= '+ top +', left='+ left +', status=no,toolbar=no,menubar=no');
         });
     }
 
+
+
+
+    /////////animation//////////////
+
+    const animItems = document.querySelectorAll('.animate-items');
+
+    if (animItems.length > 0) {                    //Проверяем есть-ли элементы на странице
+        window.addEventListener('scroll', animOnScroll);
+        function animOnScroll() {
+            for (let i = 0; i < animItems.length; i++) {
+                const animItem = animItems[i];
+                const animItemHeight = animItem.offsetHeight;   //получаем высоту каждого элемента
+                const animItemOffset = offset(animItem).top;   //сколько проскролено сверху
+                const animStart = 4;
+
+                let animItemPoint = window.innerHeight - animItemHeight / animStart;   //высота окна минус 1/4 высоты элемента
+
+
+                if(animItemHeight > window.innerHeight) {
+                    animItemPoint = window.innerHeight - window.innerHeight / animStart;
+                }
+
+                if((pageYOffset > animItemOffset - animItemPoint) && pageYOffset < (animItemOffset + animItemHeight)) {
+                    animItem.classList.add('active');
+                } else {
+                    if(!animItem.classList.contains('animate-no-hide')) {
+                        animItem.classList.remove('active');
+                    }
+                }
+            }
+        }
+
+        function offset(el) {
+            const rect = el.getBoundingClientRect(); //возвращает размер элемента и его позицию относительно viewport (часть страницы, показанная на экране, и которую мы видим).
+            let scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;             //текущее состояние прокрутки по ширине.
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;               //текущее состояние прокрутки по высоте.
+            return { top: rect.top + scrollTop, left: rect.left + scrollLeft};
+
+        }
+
+        setTimeout(() => {
+            animOnScroll();
+        }, 300);
+
+        
+    }
+
+    
+    // const animItems = document.querySelectorAll(`.anim-items`);
+    //     if (animItems.length > 0) {
+    //         window.addEventListener(`scroll`, animOnScroll);
+
+    //         function animOnScroll() {
+    //             for (let index = 0; index < animItems.length; index++) {
+    //                 const animItem = animItems[index];
+    //                 const animItemHeight = animItem.offsetHeight;
+    //                 const animItemOffSet = offset(animItem).top;
+    //                 const animStart = 4;
+    //                 let animItemPoint = window.innerHeight - animItemHeight / animStart;
+    //                 if (animItemHeight > window.innerHeight) {
+    //                     animItemPoint = window.innerHeight - window.innerHeight / animStart;
+    //                 }
+    //                 if ((pageYOffset > animItemOffSet - animItemPoint) && pageYOffset < (animItemOffSet + animItemHeight)) {
+    //                     animItem.classList.add(`active`);
+    //                 } else {
+    //                     // if (!(animItem.classList.contains(`_anim-no-hide`))) {
+                           
+    //                     // }
+    //                      animItem.classList.remove(`active`);
+    //                 }
+    //             }
+    //         }
+
+    //         function offset(el) {
+    //             const rect = el.getBoundingClientRect()
+    //             let scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+    //             let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    //             return {top: rect.top + scrollTop, left: rect.left + scrollLeft};
+    //         }
+
+    // // setTimeout(() => {
+    // //     animOnScroll()
+    // // }, 300)
+    // }
         
 
 
