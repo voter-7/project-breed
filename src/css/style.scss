@@ -34,13 +34,6 @@ html, body{
 }
 
 
-
-
-section {
-    border-top: 1px solid transparent;
-    border-bottom: 1px solid transparent;
-}
-
 li {
    list-style-type: none; 
    text-align: left;
@@ -89,6 +82,15 @@ h3 {
     line-height: 1.2;
     margin: 10px 0;
     color: #000;
+    font-family: inherit;
+}
+
+h4 {
+    font-size: 30px;
+    font-weight: 500;
+    line-height: 1.2;
+    color: #000;
+    padding-bottom: 24px;
     font-family: inherit;
 }
 
@@ -715,14 +717,14 @@ section {
     .dog-owners-slider {
         position: relative;
         overflow: hidden;
-        margin-bottom: 112px;
+        padding-bottom: 112px;
         width: 100%;
         transform: translate(0, 30%);
         opacity: 0;
         transition: all 0.8s ease 0s;
 
         @media (max-width: $adaptive-width-mobile) {
-            margin-bottom: 60px;
+            padding-bottom: 60px;
         }
         ul {
             /*width: 100%;*/
@@ -793,7 +795,7 @@ section {
             width: 25px;
             height: 40px;
             left: -40px;
-            top: 70%;
+            top: 60%;
             opacity: .5;
             margin-top: -20px;
             cursor: pointer;
@@ -844,7 +846,7 @@ section {
             height: 40px;
             opacity: .5;
             right: -40px;
-            top: 70%;
+            top: 60%;
             margin-top: -20px;
             cursor: pointer;
             transition: .35s ease;
@@ -1276,3 +1278,164 @@ footer {
     }
 }
 
+
+///////////about-page//////////////
+
+
+.about {
+    height: 550px;
+
+    @media (max-width: $adaptive-width-tablet-small) {
+        height: 450px;
+    }
+
+    .about-slider {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        overflow: hidden;
+
+        .slider-track {
+            display: flex;
+            width: 100%;
+            height: 100%;
+
+            .slider-track-item {
+                background-size: cover;
+                background-position: center center;
+                background-repeat: no-repeat;
+                min-width: 100%;
+                height: 100%;
+
+                .slider-track-text {
+                    margin-top: 150px;
+                    transform: translate(0, 30%);
+                    opacity: 0;
+                    transition: all 0.8s ease 0s;
+
+                    @media (max-width: $adaptive-width-tablet-small) {
+                        margin-top: 100px;
+                    }
+
+                    .slider-text {
+                        position: relative;
+                        text-align: center;
+                        font-size: 1.25rem;
+                        line-height: 1.5;
+                        font-weight: 300;
+                        color: #fff;
+                        margin-bottom: 48px;
+                        z-index: 2;
+                        padding: 0 8rem;
+
+                        @media(max-width: $adaptive-width-tablet-small) {
+                            padding: 0 5rem;
+                        }
+
+                        @media(max-width: $adaptive-width-mobile) {
+                            padding: 0 3rem;
+                            font-size: 1.1rem;
+                            margin-bottom: 30px;
+                        }
+                    }
+
+                    .btn-wrap {
+                        text-align: center;
+
+                        a {
+                            position: relative;
+                            font-size: 13px;
+                            text-transform: uppercase;
+                            letter-spacing: .2em;
+                            color: #fff;
+                            padding: 0.675rem 1.2rem;
+                            border-radius: 4px;
+                            border: 2px solid #fff;
+
+                            &.active {
+                                border: 2px solid #fff;
+                                &:hover {
+                                    background-color: $color-button-hover;
+                                    color: $color-button-text-hover;
+                                    @extend .transition-all;
+                                }
+                            }
+                            @media(max-width: $adaptive-width-mobile) {
+                                padding: 0.5rem 1rem;
+                                font-size: 11px;
+                            }
+                
+                        }
+                    }
+
+                    &.active {
+                        transform: translate(0, 0);
+                        opacity: 1;
+                    }
+                }
+
+                &:before {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background: rgba(0, 0, 0, 0.2);
+                }  
+            }
+        }
+    }
+}
+
+.about-content-block {
+    width: 100%;
+    display: flex;
+
+    @media (max-width: $adaptive-width-tablet-middle) {
+        flex-direction: column;
+
+        &.reverse {
+            flex-direction: column-reverse;
+        }
+    }
+
+    .image {
+        flex-basis: 50%;
+        overflow: hidden;
+
+        img {
+            background-size: cover;
+            background-position: center center;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    .text-description {     
+        flex-basis: 50%;
+        padding: 7%;
+        text-align: center;
+        transform: translate(0, 20%);
+        opacity: 0;
+        transition: all 0.8s ease 0s;
+
+        p {
+            padding-bottom: 48px;
+
+           
+        }
+
+        button {
+            border: none;
+            padding: 0.5rem 1.5rem;
+        }
+
+        &.active {
+            transform: translate(0, 0);
+            opacity: 1;
+        }
+        
+    }
+}

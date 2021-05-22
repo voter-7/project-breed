@@ -40,63 +40,72 @@ window.addEventListener('DOMContentLoaded', () => {
         dotsWrap = document.querySelector('.dots'),
         dots = document.querySelectorAll('.owl-dot');
 
+        if(slides.length) {
 
-    function showSlide(n) {
+            function showSlide(n) {
 
-        if (n > slides.length) {
-            slideIndex = 1;
-        }
-
-        if (n < 1) {
-            slideIndex = slides.length;
-        }
-
-        slides.forEach((item) => item.style.display = 'none');
-        dots.forEach((item) => item.classList.remove('active'));
-
-        slides[slideIndex - 1].style.display = 'block';
-        dots[slideIndex - 1].classList.add('active');
-
-    }
-
-    showSlide(slideIndex);
-
-    function plusSlides(n) {
-        showSlide(slideIndex += n);
-    }
-
-    function currentSlide(n) {
-        showSlide(slideIndex = n);
-    }
-
-    prev.addEventListener('click', function() {
-        plusSlides(-1);
-    });
-
-    next.addEventListener('click', function() {
-        plusSlides(1);
-    });
-
-    dotsWrap.addEventListener('click', function(event) {
-        for(let i = 0; i < dots.length + 1; i++) {
-            if(event.target.classList.contains('owl-dot') && event.target == dots[i-1]) {
-                currentSlide(i);
-            }
-        }
-    });
-
-
-    mainSlider.addEventListener('mouseover', function() {
-        prev.style.opacity = '1';
-        next.style.opacity = '1';
-
-    });
-
-    mainSlider.addEventListener('mouseout', function() {
-        prev.style.opacity = '0';
-        next.style.opacity = '0';
+                if (n > slides.length) {
+                    slideIndex = 1;
+                }
         
-    });
+                if (n < 1) {
+                    slideIndex = slides.length;
+                }
+        
+                slides.forEach((item) => item.style.display = 'none');
+                dots.forEach((item) => item.classList.remove('active'));
+        
+                slides[slideIndex - 1].style.display = 'block';
+                dots[slideIndex - 1].classList.add('active');
+        
+            }
+            showSlide(slideIndex);
+
+            function plusSlides(n) {
+                showSlide(slideIndex += n);
+            }
+        
+            function currentSlide(n) {
+                showSlide(slideIndex = n);
+            }
+        
+            prev.addEventListener('click', function() {
+                plusSlides(-1);
+            });
+        
+            next.addEventListener('click', function() {
+                plusSlides(1);
+            });
+        
+            dotsWrap.addEventListener('click', function(event) {
+                for(let i = 0; i < dots.length + 1; i++) {
+                    if(event.target.classList.contains('owl-dot') && event.target == dots[i-1]) {
+                        currentSlide(i);
+                    }
+                }
+            });
+        
+        
+            mainSlider.addEventListener('mouseover', function() {
+                prev.style.opacity = '1';
+                next.style.opacity = '1';
+        
+            });
+        
+            mainSlider.addEventListener('mouseout', function() {
+                prev.style.opacity = '0';
+                next.style.opacity = '0';
+                
+            });
+
+        }
+
+
+  
+
+  
+
+ 
 
 
      
